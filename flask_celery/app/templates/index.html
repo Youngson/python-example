@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>Flask and Celery</title>
+</head>
+<body>
+    <form method="post" name="new_user">
+        <fieldset>
+            <div>
+                <label for="username">Username</label>
+                <input id="username" name="username" type="text" maxlength="16" required>
+            </div>
+            <br/>
+            <div>
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" maxlength="64" required>
+            </div>
+            <br/>
+            <div>
+                <button type="submit">New user</button>
+            </div>
+        </fieldset>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th style="min-width: 50px;">#</th>
+                <th style="min-width: 200px;">Username</th>
+                <th style="min-width: 200px;">Email</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>
+                        <a href="{{ url_for('main.send_mail', username=user.username) }}">Send mail</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

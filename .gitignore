@@ -1,0 +1,10 @@
+.idea/
+
+__pycache__/
+*.py[cod]
+
+flask_celery/migrations/
+flask_celery/venv/
+celerybeat*.*
+
+*.db
