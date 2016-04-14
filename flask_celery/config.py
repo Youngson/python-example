@@ -22,6 +22,9 @@ class BaseConfig:
     MAIL_DEFAULT_SENDER = os.getenv('MAIL_DEFAULT_SENDER')
 
     CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL', 'redis://localhost:6379')
+    CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND',
+                                      'db+sqlite:///{0}'.format(
+                                          os.path.join(base_dir, 'celery.db')))
     CELERYBEAT_SCHEDULE = {
         'every_one_minutes_print_utc_time': {
             'task': 'print_time',

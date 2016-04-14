@@ -5,6 +5,7 @@
     <title>Flask and Celery</title>
 </head>
 <body>
+    <h3>Create User</h3>
     <form method="post" name="new_user">
         <fieldset>
             <div>
@@ -22,6 +23,8 @@
             </div>
         </fieldset>
     </form>
+
+    <h3 style="margin-top: 60px;">User List</h3>
     <table>
         <thead>
             <tr>
@@ -39,6 +42,38 @@
                     <td>{{ user.email }}</td>
                     <td>
                         <a href="{{ url_for('main.send_mail', username=user.username) }}">Send mail</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div style="border-bottom: 1px solid #000; margin: 30px 0 30px 0"></div>
+
+    <h3>Task List</h3>
+    <table>
+        <thead>
+            <tr>
+                <th style="min-width: 300px;">#</th>
+                <th style="min-width: 150px;">Func</th>
+                <th style="min-width: 220px;">Run Time</th>
+                <th style="min-width: 100px;">State</th>
+                <th>Params</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+                <tr>
+                    <td>{{ task.id }}</td>
+                    <td>{{ task.func }}</td>
+                    <td>{{ task.send_time }}</td>
+                    <td>{{ get_task_state(task.id) }}</td>
+                    <td>
+                        <ul>
+                            {% for k, v in json.loads(task.params).items() %}
+                                <li>{{ '{0} : {1}'.format(k, v) }}</li>
+                            {% endfor %}
+                        </ul>
                     </td>
                 </tr>
             {% endfor %}
